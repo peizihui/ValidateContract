@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <!-- 配置文件路径 -->
+    <properties resource="generator/generator-jdbc.properties"/>
+    <context id="Mysql" targetRuntime="MyBatis3" defaultModelType="flat">
+        <plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin"/>
+        <!-- Example 目标包修改插件 -->
+        <plugin type="com.itfsw.mybatis.generator.plugins.ExampleTargetPlugin">
+            <property name="targetPackage" value="${example.package}"/>
+        </plugin>
+        <commentGenerator>
+            <property name="suppressDate" value="true"/>
+            <property name="suppressAllComments" value="false"/>
+            <property name="javaFileEncoding" value="UTF-8"/>
+        </commentGenerator>
+        <jdbcConnection driverClass="${jdbc.driver}"
+                        connectionURL="${jdbc.url}" userId="${jdbc.username}" password="${jdbc.password}">
+        </jdbcConnection>
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="true"/>
+        </javaTypeResolver>
+        <javaModelGenerator targetPackage="${model.package}"
+                            targetProject="${target.project}">
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
+            <property name="javaExampleTargetPackage" value="${model.package}"/>
+            <property name="javaExampleTargetProject" value="${target.project}"/>
+        </javaModelGenerator>
+        <sqlMapGenerator targetPackage="${xml.package}"
+                         targetProject="${xml.target.project}">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+        <javaClientGenerator type="XMLMAPPER"
+                             targetPackage="${mapper.package}" targetProject="${target.project}">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+
+        <!--	<table tableName="apikey">
+                <property name="rootClass" value="${mapper.rootClass}" />
+                <property name="useActualColumnNames" value="false" />
+            </table>-->
+
+
+        <!--	<table tableName="block_max_size">
+                <property name="rootClass" value="${mapper.rootClass}" />
+                <property name="useActualColumnNames" value="false" />
+            </table>
+
+            <table tableName="block_max_transacton_size">
+                <property name="rootClass" value="${mapper.rootClass}" />
+                <property name="useActualColumnNames" value="false" />
+            </table>-->
+
+        <!--<table tableName="feedback_reply_info">
+            <property name="rootClass" value="${mapper.rootClass}" />
+            <property name="useActualColumnNames" value="false" />
+        </table>-->
+        <table tableName="contract_event_info">
+            <property name="rootClass" value="${mapper.rootClass}"/>
+            <property name="useActualColumnNames" value="false"/>
+        </table>
+    </context>
+</generatorConfiguration>
