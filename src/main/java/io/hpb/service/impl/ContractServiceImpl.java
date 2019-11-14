@@ -8,6 +8,7 @@ import com.github.pagehelper.PageInfo;
 import io.hpb.configure.ContractConfig;
 import io.hpb.configure.HpbContractValidateProperties;
 import io.hpb.constant.BcConstant;
+import io.hpb.contract.controller.HpbController;
 import io.hpb.contract.solidity.compiler.CompilationResult;
 import io.hpb.entity.*;
 import io.hpb.example.ContractEventInfoExample;
@@ -56,7 +57,7 @@ public class ContractServiceImpl extends AbstractBaseService implements Contract
     private static final String ONE_BLANK = " ";
     private static final String LEFT_BRACKET = "(";
     private static final String RIGHT_BRACKET = ")";
-    public Logger log = LoggerFactory.getLogger("contractCompileAppenderLogger");
+    public Logger log = LoggerFactory.getLogger(ContractServiceImpl.class);
     @Autowired
     ContractLibraryAddressInfoMapper contractLibraryAddressInfoMapper;
    // @Autowired
@@ -259,9 +260,11 @@ public class ContractServiceImpl extends AbstractBaseService implements Contract
     }
 
     @Override
-    public Map validateCompilerContractResult(ContractVerifyModel contractVerifyModel, CompilationResult compilerContractResult) {
+    public Map validateCompilerContractResult(ContractVerifyModel contractVerifyModel, CompilationResult compilerContractResult,String compileAbi,String compileBin) {
 
         log.info("validateContractByCompilerContractResult address [{}] ,", contractVerifyModel.getContractAddr());
+        log.info("compileAbi ==="+compileAbi);
+        log.info("compileBin ==="+compileBin);
         Map resultMap = new HashMap();
         String txHash = contractVerifyModel.getTxHash();
         String contractAddr = contractVerifyModel.getContractAddr();
@@ -269,8 +272,8 @@ public class ContractServiceImpl extends AbstractBaseService implements Contract
         String contractCompilerType = contractVerifyModel.getContractCompilerType();
         String contractCompilerVersion = contractVerifyModel.getContractCompilerVersion();
         String contractName = contractVerifyModel.getContractName();
-        String contractAbi = contractVerifyModel.getContractAbi();
-        String contractBin = contractVerifyModel.getContractBin();
+        String contractAbi = compileAbi;
+        String contractBin = compileBin;
         String optimizeFlag = contractVerifyModel.getOptimizeFlag();
         String hvmVersion = contractVerifyModel.getHvmVersion();
         Long miscSettingRuns = contractVerifyModel.getMiscSettingRuns();
@@ -284,23 +287,7 @@ public class ContractServiceImpl extends AbstractBaseService implements Contract
             }
         }
 
-        String compilerSrcBin = "";
-        for (int i =0; i < compilerContractResult.getContractKeys().size(); i ++) {
-            String key = compilerContractResult.getContractKeys().get(i);
-            log.info("key ==== " + key);
-            log.info("contractVerifyModel.getContractName() ==== " + contractVerifyModel.getContractName());
-            String name = key.substring(key.lastIndexOf(':') + 1);
-            CompilationResult.ContractMetadata contractMetadata = compilerContractResult.getContracts().get(i);
-            if (!BcConstant.EMPTY_MIDDLE_BRACKET.equals(contractMetadata.abi) && key.equals(contractVerifyModel.getContractName())) {
-                 compilerSrcBin = contractMetadata.bin;
-                log.info("key ==== [{}], compilerSrcBin  [{}] ", key, compilerSrcBin);
-            }
-        }
-        //compilerContractResult.getContracts().getTokenERC20().getBin();
-        log.info("compilerContractResult .getContracts().Map.getBin()  [{}] ", compilerSrcBin);
-
         boolean flag = false;
-
         HpbTransaction hpbTransaction = null;
         Transaction transaction = null;
         try {
@@ -331,10 +318,7 @@ public class ContractServiceImpl extends AbstractBaseService implements Contract
         }
         String input = transaction.getInput();
         try {
-            // compilerSrcBin = "0x"+compilerSrcBin;
-            log.info("input.indexOf(compilerSrcBin)  ==== " + input.indexOf(compilerSrcBin));
-            log.info("input.contains(compilerSrcBin) ==== " + input.contains(compilerSrcBin));
-            if (StringUtils.isNotEmpty(input) && input.contains(compilerSrcBin)) {
+            if (StringUtils.isNotEmpty(input)) {
                 String from = "";
                 if (transaction != null) {
                     from = transaction.getFrom();
@@ -354,14 +338,15 @@ public class ContractServiceImpl extends AbstractBaseService implements Contract
                 contractInfo.setMiscSettingRuns(miscSettingRuns);
                 contractInfo.setCreateTimestamp(DateUtils.getNowDate());
                 contractInfo.setVerifiedStatus("Y");
+                contractInfo.setCreateTimestamp(DateUtils.getNowDate());
                 ContractInfo contractInfoInDb = contractInfoMapper.selectByPrimaryKey(contractAddr);
                 flag = true;
-                resultMap.put("isValidate", flag);
+               // resultMap.put("isValidate", flag);
                 if (contractInfoInDb != null) {
                     contractInfoMapper.updateByPrimaryKey(contractInfo);
                 } else {
                     int x = contractInfoMapper.insert(contractInfo);
-                    log.info("  contractInfoMapper.insert(contractInfo)");
+                    log.info("  contractInfoMapper.insert(contractInfo) x ===="+x);
                 }
                 ObjectMapper objectMapper = ObjectMapperFactory.getObjectMapper();
                 AbiDefinition[] abiDefinition = objectMapper.readValue(contractAbi, AbiDefinition[].class);
@@ -370,6 +355,7 @@ public class ContractServiceImpl extends AbstractBaseService implements Contract
                     String abi = null;
                     try {
                         abi = ObjectJsonHelper.serialize(obj);
+                        log.info("AbiDefinition abi ==="+abi);
                     } catch (JsonProcessingException e) {
                         e.printStackTrace();
                     }
@@ -397,7 +383,13 @@ public class ContractServiceImpl extends AbstractBaseService implements Contract
                         contractMethodInfo.setMethodId(methodId);
                         contractMethodInfo.setMethodName(methodName.toString());
                         contractMethodInfo.setMethodAbi(abi);
-                        contractMethodInfoMapper.insert(contractMethodInfo);
+                        contractMethodInfo.setCreateTimestamp(DateUtils.getNowDate());
+                        ContractMethodInfo contractMethodInfoInDb = contractMethodInfoMapper.selectByContractAndMethod(contractAddr,methodId);
+                        if(contractMethodInfoInDb == null){
+                            int cm =  contractMethodInfoMapper.insert(contractMethodInfo);
+                            log.info("  contractMethodInfoMapper.insert(contractMethodInfo) cm ===="+cm);
+                        }
+
                     }
                     if (EVENT.equals(obj.getType())) {
                         String name = obj.getName();
@@ -423,11 +415,14 @@ public class ContractServiceImpl extends AbstractBaseService implements Contract
                         contractEventInfo.setId(UUIDGeneratorUtil.generate(obj));
                         contractEventInfo.setEventName(eventName.toString());
                         contractEventInfo.setEventHash(eventHash);
-                        contractEventInfoMapper.insert(contractEventInfo);
+                        contractEventInfo.setCreateTimestamp(DateUtils.getNowDate());
+                        ContractEventInfo contractEventInfoInDb =   contractEventInfoMapper.selectByContractEventInfo(contractAddr,eventHash);
+                        if(contractEventInfoInDb == null){
+                            int cei =  contractEventInfoMapper.insert(contractEventInfo);
+                            log.info("  contractEventInfoMapper.insert(contractEventInfo) cei ===="+cei);
+                        }
                     }
                 });
-            } else {
-                resultMap.put("isValidate", false);
             }
 
         } catch (Exception e) {

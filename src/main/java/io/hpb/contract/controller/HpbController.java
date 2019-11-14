@@ -50,7 +50,6 @@ import io.hpb.web3.protocol.core.methods.response.HpbGetTransactionReceipt;
 import io.hpb.web3.protocol.core.methods.response.TransactionReceipt;
 import io.hpb.web3.spring.autoconfigure.Web3Properties;
 import io.hpb.web3.utils.Numeric;
-//import io.hpb.web3.protocol.admin.Admin;
 import io.swagger.annotations.ApiOperation;
 @RestController
 @RequestMapping("/")
@@ -239,6 +238,7 @@ public class HpbController{
     @ApiOperation(value = "验证并开源智能合约代码", notes = "新方法便于ContractLibraryAddress,根据编译得到的compileBin 与客户提交的bin一致，就验证通过")
     @PostMapping("/validate/contract")
     public List<Object> validateContractInfo(@RequestBody ContractVerifyModel contractVerifyModel) {
+		log.info("validateContractInfo contractVerifyModel  "+contractVerifyModel.getContractName() + contractVerifyModel.getContractAddr());
         Map<String, Object> param = new HashMap<String, Object>();
         String soliditySrcCode = contractVerifyModel.getContractSrc();
 
@@ -255,13 +255,13 @@ public class HpbController{
         }
         String contractName = contractVerifyModel.getContractName();
         String name=new HmacUtils(HmacAlgorithms.HMAC_MD5, contractName).hmacHex(soliditySrcCode);
+        log.info("contractName ==="+contractName);
+		log.info("name ==="+name);
 
         if(web3Properties.getSolcCmd()!=null) {
             solidityCompiler.setDockerSolcCmd(web3Properties.getSolcCmd());
-            solidityCompiler.setSolcVersion(contractVerifyModel.getHvmVersion());
+            solidityCompiler.setSolcVersion(contractVerifyModel.getContractCompilerVersion());
         }
-
-
         String cpath="/opt/contract/";
         cpath = hpbContractProperties.getCpath();
         File cfile = new File(cpath+name+".sol");
@@ -282,7 +282,8 @@ public class HpbController{
         String optimize = contractVerifyModel.getOptimizeFlag();
         SolidityCompiler.Result res = null;
         try {
-            res = solidityCompiler.compileSrc(cfile,_OPTIMIZE.equals(optimize.trim()), true, ABI, BIN, INTERFACE, METADATA);
+             res = solidityCompiler.compileSrc(cfile,_OPTIMIZE.equals(optimize.trim()), true, ABI, BIN, INTERFACE, METADATA);
+            log.info("solidityCompiler res ===="+ObjectJsonHelper.serialize(res));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -290,11 +291,10 @@ public class HpbController{
             param.put("result",res.errors);
             log.info("Err: '{}'", res.errors);
         }else {
-            //log.info("Out: '{}'" ,res.output);
             CompilationResult compilationResult = null;
             try {
                 compilationResult = CompilationResult.parse(res.output);
-                log.info(" CompilationResult compilationResult ===="+compilationResult);
+                log.info("1. CompilationResult compilationResult ===="+ObjectJsonHelper.serialize(compilationResult));
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -332,29 +332,13 @@ public class HpbController{
                 String binCode = split2[0];
                 String dataCode = split1[0];
                 if(binCode.endsWith(dataCode)){
-                    //list.add(res.output);
-                    //list.add("合约验证成功");
-                    //param.put("result",res.output);
-                    param.put("resultInfo","编译成功");
-                    try {
-                        AbiDefinition[] abiDefinition = ObjectJsonHelper.deserialize(metadata.abi, AbiDefinition[].class);
-                        for(AbiDefinition abi:abiDefinition) {
-                            if(abi.getType().equals("constructor")) {
-                                List<AbiDefinition.NamedType> namedTypes=abi.getInputs();
-                                if(namedTypes!=null&&namedTypes.size()>0) {
-                                    List<TypeReference<?>> inputParameterTypes = Utils.buildTypeReferenceTypes(namedTypes);
-                                    List<TypeReference<Type>> convert = Utils.convert(inputParameterTypes);
-                                    List<Type> decode = FunctionReturnDecoder.decode(Numeric.cleanHexPrefix(split2[1].replace(split1[1], "")), convert);
-                                }
-                                break;
-                            }
-                        }
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                    contractService.validateCompilerContractResult(contractVerifyModel,compilationResult);
+                    log.info("2. 编译成功");
+					param = contractService.validateCompilerContractResult(contractVerifyModel,compilationResult,metadata.abi,metadata.bin);
+					param.put("resultInfo","编译成功");
+					param.put(ContractConstant.RETURN_CODE, ContractConstant.SUCCESS_CODE);
+					param.put(ContractConstant.RETURN_MSG, ContractConstant.HAVE_VALIED);
                 }else {
-                    // list.add("合约不匹配");
+					log.info("3. 合约不匹配");
                     param.put("info","合约不匹配");
                     Map<String,Object> map=new HashMap<>();
                     if(dataCode.length()<binCode.length()) {
@@ -365,6 +349,8 @@ public class HpbController{
                         map.put("链上合约的bin", dataCode);
                     }
                     param.put("info",map);
+					param.put(ContractConstant.RETURN_CODE, ContractConstant.ERROR_CODE);
+					param.put(ContractConstant.RETURN_MSG, ContractConstant.HAVE_NOT_VALIED);
                 }
             }else {
                 param.put("info","合约不存在");

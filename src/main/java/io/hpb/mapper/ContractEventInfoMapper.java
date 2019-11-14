@@ -118,4 +118,6 @@ public interface ContractEventInfoMapper {
      * @mbg.generated
      */
     int updateByPrimaryKey(ContractEventInfo record);
+
+    ContractEventInfo selectByContractEventInfo(@Param("contractAddr") String contractAddr, @Param("eventHash") String eventHash);
 }

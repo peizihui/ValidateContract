@@ -154,6 +154,14 @@
 		<appender-ref ref="ASYNC_LOG_WARN" />
 		<appender-ref ref="ASYNC_LOG_ERROR" />
 	</logger>
+	<logger name="io.hpb.service" level="DEBUG" additivity="false">
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="ASYNC_LOG" />
+		<appender-ref ref="ASYNC_LOG_DEBUG" />
+		<appender-ref ref="ASYNC_LOG_INFO" />
+		<appender-ref ref="ASYNC_LOG_WARN" />
+		<appender-ref ref="ASYNC_LOG_ERROR" />
+	</logger>
 	<logger name="org.apache.http.wire" level="warn" additivity="false">
 		<appender-ref ref="STDOUT" />
 		<appender-ref ref="ASYNC_LOG" />

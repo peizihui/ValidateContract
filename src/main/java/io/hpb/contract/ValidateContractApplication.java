@@ -1,5 +1,6 @@
 package io.hpb.contract;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.Banner;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -20,7 +21,8 @@ import io.hpb.contract.common.SpringBootContext;
 @EnableAsync
 @EnableWebSecurity
 @EnableAutoConfiguration(exclude = {SecurityAutoConfiguration.class})
-@ComponentScan(basePackages = {"io.hpb.contract","io.hpb.web3"})
+@ComponentScan(basePackages = {"io.hpb"})
+//@MapperScan(basePackages = "io.hpb")
 public class ValidateContractApplication {
 
 	public static void main(String[] args) {

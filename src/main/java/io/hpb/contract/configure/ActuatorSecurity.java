@@ -1,4 +1,5 @@
-package io.hpb.contract.configure;
+package
+		io.hpb.contract.configure;
 
 import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
 import org.springframework.context.annotation.Configuration;

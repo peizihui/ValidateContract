@@ -59,7 +59,7 @@
             <property name="rootClass" value="${mapper.rootClass}" />
             <property name="useActualColumnNames" value="false" />
         </table>-->
-        <table tableName="contract_event_info">
+        <table tableName="addrs">
             <property name="rootClass" value="${mapper.rootClass}"/>
             <property name="useActualColumnNames" value="false"/>
         </table>

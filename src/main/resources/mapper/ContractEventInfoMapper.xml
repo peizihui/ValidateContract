@@ -347,4 +347,10 @@
       create_timestamp = #{createTimestamp,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=VARCHAR}
   </update>
+
+  <select id="selectByContractEventInfo" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>  from contract_event_info  where contract_addr = #{contractAddr,jdbcType=VARCHAR} and event_hash = #{eventHash,jdbcType=VARCHAR}
+</select>
+
 </mapper>

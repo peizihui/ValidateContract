@@ -33,7 +33,7 @@ public interface ContractService {
 
    // public Map validateContractByCompilerContractResult(ContractVerifyModel contractVerifyModel, CompilerContractResult compilerContractResult);
 
-    public Map validateCompilerContractResult(ContractVerifyModel contractVerifyModel, CompilationResult compilerContractResult);
+    public Map validateCompilerContractResult(ContractVerifyModel contractVerifyModel, CompilationResult compilerContractResult,String abi,String bin);
 
 
 

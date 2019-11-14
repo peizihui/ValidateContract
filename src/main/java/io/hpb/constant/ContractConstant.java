@@ -29,7 +29,19 @@ public interface ContractConstant {
     public static final String NOSRCCODE = "请指定需要编译的solidity代码";
     public static final String NO_HASH = "请输入创建该合约的交易Hash";
     public static final String HAVE_VALIED = "已经验证过";
+    public static final String HAVE_NOT_VALIED = "验证失败";
     public static final String PROCCESS_ID = "proccessId";
-    public static final String SOLC_CMD_DEFAULT = "docker rm -rf solc;docker run -it --privileged=true --net=host -v /home/hpbroot/ethereum_go/contract:/contract --name solc ethereum/solc:stable";
+   // public static final String SOLC_CMD_DEFAULT = "docker rm -rf solc;docker run -it --privileged=true --net=host -v /home/hpbroot/ethereum_go/contract:/contract --name solc ethereum/solc:stable";
     public static final String SOLC_STABLE="stable";
+    public static final String SOLC_CMD_DEFAULT="docker run --rm -it --privileged=true --name solc ethereum/solc";
+
+/*    public static final String RETURN_CODE="RETURN_CODE";
+    public static final String RETURN_MSG="RETURN_MSG";
+    public static final String SUCCESS_CODE="000000";
+    public static final String ERROR_CODE="999999";
+    public static final String SUCCESS_MSG = "操作成功";
+    public static final String NOSRCCODE = "请指定需要编译的solidity代码";
+    public static final String PROCCESS_ID = "proccessId";
+    public static final String SOLC_CMD_DEFAULT="docker run --rm -it --privileged=true --name solc ethereum/solc";
+    public static final String SOLC_STABLE="stable";*/
 }

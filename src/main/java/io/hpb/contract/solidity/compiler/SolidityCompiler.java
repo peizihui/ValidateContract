@@ -15,13 +15,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import io.hpb.constant.ContractConstant;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
-import io.hpb.contract.common.ContractConstant;
 import io.hpb.contract.util.AppObjectUtil;
 import io.hpb.web3.protocol.Web3;
 import io.hpb.web3.spring.autoconfigure.Web3Properties;
@@ -40,7 +40,7 @@ public class SolidityCompiler {
     private String solcVersion;
     public static Log log = LogFactory.getLog(SolidityCompiler.class);
     public SolidityCompiler() {
-		this.dockerSolcCmd=ContractConstant.SOLC_CMD_DEFAULT;
+		this.dockerSolcCmd= ContractConstant.SOLC_CMD_DEFAULT;
 		this.solcVersion=ContractConstant.SOLC_STABLE;
 	}
     
