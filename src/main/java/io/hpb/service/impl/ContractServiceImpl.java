@@ -272,8 +272,8 @@ public class ContractServiceImpl extends AbstractBaseService implements Contract
         String contractCompilerType = contractVerifyModel.getContractCompilerType();
         String contractCompilerVersion = contractVerifyModel.getContractCompilerVersion();
         String contractName = contractVerifyModel.getContractName();
-        String contractAbi = compileAbi;
-        String contractBin = compileBin;
+        //String contractAbi = compileAbi;
+        // String contractBin = compileBin;
         String optimizeFlag = contractVerifyModel.getOptimizeFlag();
         String hvmVersion = contractVerifyModel.getHvmVersion();
         Long miscSettingRuns = contractVerifyModel.getMiscSettingRuns();
@@ -328,8 +328,8 @@ public class ContractServiceImpl extends AbstractBaseService implements Contract
                 contractInfo.setContractName(contractName);
                 contractInfo.setContractCreater(contractCreater);
                 contractInfo.setContractSrc(contractSrc);
-                contractInfo.setContractAbi(contractAbi);
-                contractInfo.setContractBin(contractBin);
+                contractInfo.setContractAbi(compileAbi);
+                contractInfo.setContractBin(compileBin);
                 contractInfo.setOptimizeFlag(optimizeFlag);
                 contractInfo.setCompilerType(contractCompilerType);
                 contractInfo.setCompilerVersion(contractCompilerVersion);
@@ -349,7 +349,7 @@ public class ContractServiceImpl extends AbstractBaseService implements Contract
                     log.info("  contractInfoMapper.insert(contractInfo) x ===="+x);
                 }
                 ObjectMapper objectMapper = ObjectMapperFactory.getObjectMapper();
-                AbiDefinition[] abiDefinition = objectMapper.readValue(contractAbi, AbiDefinition[].class);
+                AbiDefinition[] abiDefinition = objectMapper.readValue(compileAbi, AbiDefinition[].class);
                 List<AbiDefinition> abiDefinitionList = Arrays.asList(abiDefinition);
                 abiDefinitionList.forEach(obj -> {
                     String abi = null;
