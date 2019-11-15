@@ -69,7 +69,7 @@ public class HpbController{
 	@Autowired
     private ContractService contractService;
 
-	private final String cpath="/opt/contract/";
+	// private final String cpath="/opt/contract/";
 	@Autowired
     HpbContractProperties hpbContractProperties;
 	@ApiOperation(value="合约编译",notes = "合约编译"
@@ -84,7 +84,7 @@ public class HpbController{
 					reqStrList.get(0),StandardCharsets.UTF_8.name());
 			String contractName = reqStrList.get(1);
 			String name=new HmacUtils(HmacAlgorithms.HMAC_MD5, contractName).hmacHex(contract);
-			File cfile = new File(cpath+name+".sol");
+			File cfile = new File(hpbContractProperties.getCpath()+name+".sol");
 			FileUtils.writeStringToFile(cfile, contract, StandardCharsets.UTF_8,false);
 			String solcVersion = reqStrList.get(2);
 			if(web3Properties.getSolcCmd()!=null) {
@@ -124,7 +124,7 @@ public class HpbController{
 					reqStrList.get(0),StandardCharsets.UTF_8.name());
 			String contractName = reqStrList.get(1);
 			String name=new HmacUtils(HmacAlgorithms.HMAC_MD5, contractName).hmacHex(contract);
-			File cfile = new File(cpath+name+".sol");
+			File cfile = new File(hpbContractProperties.getCpath()+name+".sol");
 			FileUtils.writeStringToFile(cfile, contract, StandardCharsets.UTF_8,false);
 			String solcVersion = reqStrList.get(2);
 			if(web3Properties.getSolcCmd()!=null) {
@@ -243,9 +243,10 @@ public class HpbController{
         String soliditySrcCode = contractVerifyModel.getContractSrc();
 
         if (StringUtils.isBlank(soliditySrcCode)) {
-            param.put(ContractConstant.RETURN_CODE, ContractConstant.ERROR_CODE_VALIED_FAIL);
+           //param.put(ContractConstant.RETURN_CODE, ContractConstant.ERROR_CODE_VALIED_FAIL);
+			param.put("IS_VALIDATED",false);
             param.put(ContractConstant.RETURN_MSG, ContractConstant.NOSRCCODE);
-            Result<Map<String, Object>> result = new Result<>(ResultCode.VALIDATE_FAIL, param);
+            Result<Map<String, Object>> result = new Result<>(ResultCode.SUCCESS, param);
             return result.getValue();
         }
         try {
@@ -259,22 +260,26 @@ public class HpbController{
 		log.info("name ==="+name);
 
         if(web3Properties.getSolcCmd()!=null) {
+        	log.info(" web3Properties.getSolcCmd() ===="+web3Properties.getSolcCmd());
             solidityCompiler.setDockerSolcCmd(web3Properties.getSolcCmd());
             solidityCompiler.setSolcVersion(contractVerifyModel.getContractCompilerVersion());
         }
-        String cpath="/opt/contract/";
-        cpath = hpbContractProperties.getCpath();
+
+        String cpath = hpbContractProperties.getCpath();
         File cfile = new File(cpath+name+".sol");
         try {
-            FileUtils.writeStringToFile(cfile, soliditySrcCode, StandardCharsets.UTF_8,false);
+           FileUtils.writeStringToFile(cfile, soliditySrcCode, StandardCharsets.UTF_8,false);
         } catch (IOException e) {
+        	log.info("cpath name e ====="+e);
             e.printStackTrace();
         }
-
+		log.info(" cfile.exists() ==="+cfile.exists());
+        log.info(" cfile.getAbsolutePath() =="+cfile.getAbsolutePath());
         if (StringUtils.isBlank(contractVerifyModel.getTxHash())) {
-            param.put(ContractConstant.RETURN_CODE, ContractConstant.ERROR_CODE_VALIED_FAIL);
+            //param.put(ContractConstant.RETURN_CODE, ContractConstant.ERROR_CODE_VALIED_FAIL);
+			param.put("IS_VALIDATED",false);
             param.put(ContractConstant.RETURN_MSG, ContractConstant.NO_HASH);
-            Result<Map<String, Object>> result = new Result<>(ResultCode.VALIDATE_FAIL, param);
+            Result<Map<String, Object>> result = new Result<>(ResultCode.SUCCESS, param);
             return result.getValue();
 
         }
@@ -288,6 +293,7 @@ public class HpbController{
             e.printStackTrace();
         }
         if(res.isFailed()) {
+			param.put("IS_VALIDATED",false);
             param.put("result",res.errors);
             log.info("Err: '{}'", res.errors);
         }else {
@@ -334,9 +340,9 @@ public class HpbController{
                 if(binCode.endsWith(dataCode)){
                     log.info("2. 编译成功");
 					param = contractService.validateCompilerContractResult(contractVerifyModel,compilationResult,metadata.abi,metadata.bin);
-					param.put("resultInfo","编译成功");
-					param.put(ContractConstant.RETURN_CODE, ContractConstant.SUCCESS_CODE);
+					//param.put(ContractConstant.RETURN_CODE, ContractConstant.SUCCESS_CODE);
 					param.put(ContractConstant.RETURN_MSG, ContractConstant.HAVE_VALIED);
+					param.put("IS_VALIDATED",true);
                 }else {
 					log.info("3. 合约不匹配");
                     param.put("info","合约不匹配");
@@ -349,15 +355,17 @@ public class HpbController{
                         map.put("链上合约的bin", dataCode);
                     }
                     param.put("info",map);
-					param.put(ContractConstant.RETURN_CODE, ContractConstant.ERROR_CODE);
+					//param.put(ContractConstant.RETURN_CODE, ContractConstant.ERROR_CODE);
 					param.put(ContractConstant.RETURN_MSG, ContractConstant.HAVE_NOT_VALIED);
+					param.put("IS_VALIDATED",false);
                 }
             }else {
                 param.put("info","合约不存在");
             }
         }
         try {
-            FileUtils.deleteQuietly(cfile);
+        boolean delFlag =    FileUtils.deleteQuietly(cfile);
+        log.info("delFlag ===="+delFlag);
         } catch (Exception e) {
             e.printStackTrace();
         }
