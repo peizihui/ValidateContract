@@ -52,7 +52,7 @@ import io.hpb.web3.spring.autoconfigure.Web3Properties;
 import io.hpb.web3.utils.Numeric;
 import io.swagger.annotations.ApiOperation;
 @RestController
-@RequestMapping("/")
+@RequestMapping("/validate-contract/")
 public class HpbController{
 	private static final String _OPTIMIZE = "200";
 	private static final String _META = "a165627a7a72305820";
@@ -241,9 +241,9 @@ public class HpbController{
 		log.info("validateContractInfo contractVerifyModel  "+contractVerifyModel.getContractName() + contractVerifyModel.getContractAddr());
         Map<String, Object> param = new HashMap<String, Object>();
         String soliditySrcCode = contractVerifyModel.getContractSrc();
+		log.info("soliditySrcCode ==="+soliditySrcCode);
 
         if (StringUtils.isBlank(soliditySrcCode)) {
-           //param.put(ContractConstant.RETURN_CODE, ContractConstant.ERROR_CODE_VALIED_FAIL);
 			param.put("IS_VALIDATED",false);
             param.put(ContractConstant.RETURN_MSG, ContractConstant.NOSRCCODE);
             Result<Map<String, Object>> result = new Result<>(ResultCode.SUCCESS, param);
@@ -251,6 +251,7 @@ public class HpbController{
         }
         try {
             soliditySrcCode = java.net.URLDecoder.decode(soliditySrcCode,StandardCharsets.UTF_8.name());
+			log.info("soliditySrcCode ==="+soliditySrcCode);
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
@@ -260,7 +261,7 @@ public class HpbController{
 		log.info("name ==="+name);
 
         if(web3Properties.getSolcCmd()!=null) {
-        	log.info(" web3Properties.getSolcCmd() ===="+web3Properties.getSolcCmd());
+
             solidityCompiler.setDockerSolcCmd(web3Properties.getSolcCmd());
             solidityCompiler.setSolcVersion(contractVerifyModel.getContractCompilerVersion());
         }
@@ -292,6 +293,14 @@ public class HpbController{
         } catch (IOException e) {
             e.printStackTrace();
         }
+		try {
+		String str =	FileUtils.readFileToString(cfile,StandardCharsets.UTF_8);
+		log.info("str ==========="+str);
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		log.info(" web3Properties.getSolcCmd() ===="+web3Properties.getSolcCmd());
         if(res.isFailed()) {
 			param.put("IS_VALIDATED",false);
             param.put("result",res.errors);

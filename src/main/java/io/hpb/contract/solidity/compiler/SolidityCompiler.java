@@ -73,7 +73,7 @@ public class SolidityCompiler {
         commandParts.add(source.getAbsolutePath());
 
         ProcessBuilder processBuilder = new ProcessBuilder(commandParts);
-
+        log.info("commandParts =="+AppObjectUtil.toJson(commandParts));
         Process process = processBuilder.start();
 
         ParallelReader error = new ParallelReader(process.getErrorStream());
