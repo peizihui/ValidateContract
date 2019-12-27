@@ -338,7 +338,7 @@ public class ContractServiceImpl extends AbstractBaseService implements Contract
                 contractInfo.setMiscSettingRuns(miscSettingRuns);
                 contractInfo.setCreateTimestamp(DateUtils.getNowDate());
                 contractInfo.setVerifiedStatus("Y");
-                contractInfo.setCreateTimestamp(DateUtils.getNowDate());
+                contractInfo.setVerifiedTimestamp(DateUtils.getNowDate());
                 ContractInfo contractInfoInDb = contractInfoMapper.selectByPrimaryKey(contractAddr);
                 flag = true;
                // resultMap.put("isValidate", flag);

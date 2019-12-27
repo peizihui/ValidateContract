@@ -2,9 +2,8 @@ package io.hpb.mapper;
 
 import io.hpb.entity.ContractInfo;
 import io.hpb.example.ContractInfoExample;
-import org.apache.ibatis.annotations.Param;
-
 import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
 public interface ContractInfoMapper {
     /**

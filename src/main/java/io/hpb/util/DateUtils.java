@@ -245,4 +245,9 @@ public class DateUtils {
         return addSeconds(new Date(System.currentTimeMillis()), days * ONE_DAY_SECONDS);
     }
 
+    public static void main(String[] args) {
+        Date d = DateUtils.getNowDate();
+        System.out.println("d = [" + d + "]");
+    }
+
 }

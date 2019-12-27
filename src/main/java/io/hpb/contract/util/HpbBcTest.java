@@ -46,19 +46,4 @@ public class HpbBcTest {
         }
     }
 
-    String s  = "pragma solidity 0.4.26;\n" +
-            "contract TestContractSimpleContract {\n" +
-            "    string private name;\n" +
-            "     event println(string name);\n" +
-            "    function setName(string memory newName) public {\n" +
-            "        name = newName;\n" +
-            "        emit println(newName);\n" +
-            "    }\n" +
-            "    function getName() public view returns (string memory) {\n" +
-            "        return name;\n" +
-            "    }\n" +
-            "}\n";
-    
-
-
 }

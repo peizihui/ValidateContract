@@ -1,6 +1,8 @@
 package io.hpb.example;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class ContractInfoExample {
@@ -401,6 +403,796 @@ public class ContractInfoExample {
 
         public Criteria andContractNameNotBetween(String value1, String value2) {
             addCriterion("contract_name not between", value1, value2, "contractName");
+            return (Criteria) this;
+        }
+
+        public Criteria andContractTypeIsNull() {
+            addCriterion("contract_type is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andContractTypeIsNotNull() {
+            addCriterion("contract_type is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andContractTypeEqualTo(String value) {
+            addCriterion("contract_type =", value, "contractType");
+            return (Criteria) this;
+        }
+
+        public Criteria andContractTypeNotEqualTo(String value) {
+            addCriterion("contract_type <>", value, "contractType");
+            return (Criteria) this;
+        }
+
+        public Criteria andContractTypeGreaterThan(String value) {
+            addCriterion("contract_type >", value, "contractType");
+            return (Criteria) this;
+        }
+
+        public Criteria andContractTypeGreaterThanOrEqualTo(String value) {
+            addCriterion("contract_type >=", value, "contractType");
+            return (Criteria) this;
+        }
+
+        public Criteria andContractTypeLessThan(String value) {
+            addCriterion("contract_type <", value, "contractType");
+            return (Criteria) this;
+        }
+
+        public Criteria andContractTypeLessThanOrEqualTo(String value) {
+            addCriterion("contract_type <=", value, "contractType");
+            return (Criteria) this;
+        }
+
+        public Criteria andContractTypeLike(String value) {
+            addCriterion("contract_type like", value, "contractType");
+            return (Criteria) this;
+        }
+
+        public Criteria andContractTypeNotLike(String value) {
+            addCriterion("contract_type not like", value, "contractType");
+            return (Criteria) this;
+        }
+
+        public Criteria andContractTypeIn(List<String> values) {
+            addCriterion("contract_type in", values, "contractType");
+            return (Criteria) this;
+        }
+
+        public Criteria andContractTypeNotIn(List<String> values) {
+            addCriterion("contract_type not in", values, "contractType");
+            return (Criteria) this;
+        }
+
+        public Criteria andContractTypeBetween(String value1, String value2) {
+            addCriterion("contract_type between", value1, value2, "contractType");
+            return (Criteria) this;
+        }
+
+        public Criteria andContractTypeNotBetween(String value1, String value2) {
+            addCriterion("contract_type not between", value1, value2, "contractType");
+            return (Criteria) this;
+        }
+
+        public Criteria andOptimizeFlagIsNull() {
+            addCriterion("optimize_flag is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOptimizeFlagIsNotNull() {
+            addCriterion("optimize_flag is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOptimizeFlagEqualTo(String value) {
+            addCriterion("optimize_flag =", value, "optimizeFlag");
+            return (Criteria) this;
+        }
+
+        public Criteria andOptimizeFlagNotEqualTo(String value) {
+            addCriterion("optimize_flag <>", value, "optimizeFlag");
+            return (Criteria) this;
+        }
+
+        public Criteria andOptimizeFlagGreaterThan(String value) {
+            addCriterion("optimize_flag >", value, "optimizeFlag");
+            return (Criteria) this;
+        }
+
+        public Criteria andOptimizeFlagGreaterThanOrEqualTo(String value) {
+            addCriterion("optimize_flag >=", value, "optimizeFlag");
+            return (Criteria) this;
+        }
+
+        public Criteria andOptimizeFlagLessThan(String value) {
+            addCriterion("optimize_flag <", value, "optimizeFlag");
+            return (Criteria) this;
+        }
+
+        public Criteria andOptimizeFlagLessThanOrEqualTo(String value) {
+            addCriterion("optimize_flag <=", value, "optimizeFlag");
+            return (Criteria) this;
+        }
+
+        public Criteria andOptimizeFlagLike(String value) {
+            addCriterion("optimize_flag like", value, "optimizeFlag");
+            return (Criteria) this;
+        }
+
+        public Criteria andOptimizeFlagNotLike(String value) {
+            addCriterion("optimize_flag not like", value, "optimizeFlag");
+            return (Criteria) this;
+        }
+
+        public Criteria andOptimizeFlagIn(List<String> values) {
+            addCriterion("optimize_flag in", values, "optimizeFlag");
+            return (Criteria) this;
+        }
+
+        public Criteria andOptimizeFlagNotIn(List<String> values) {
+            addCriterion("optimize_flag not in", values, "optimizeFlag");
+            return (Criteria) this;
+        }
+
+        public Criteria andOptimizeFlagBetween(String value1, String value2) {
+            addCriterion("optimize_flag between", value1, value2, "optimizeFlag");
+            return (Criteria) this;
+        }
+
+        public Criteria andOptimizeFlagNotBetween(String value1, String value2) {
+            addCriterion("optimize_flag not between", value1, value2, "optimizeFlag");
+            return (Criteria) this;
+        }
+
+        public Criteria andBalanceIsNull() {
+            addCriterion("balance is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBalanceIsNotNull() {
+            addCriterion("balance is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBalanceEqualTo(BigDecimal value) {
+            addCriterion("balance =", value, "balance");
+            return (Criteria) this;
+        }
+
+        public Criteria andBalanceNotEqualTo(BigDecimal value) {
+            addCriterion("balance <>", value, "balance");
+            return (Criteria) this;
+        }
+
+        public Criteria andBalanceGreaterThan(BigDecimal value) {
+            addCriterion("balance >", value, "balance");
+            return (Criteria) this;
+        }
+
+        public Criteria andBalanceGreaterThanOrEqualTo(BigDecimal value) {
+            addCriterion("balance >=", value, "balance");
+            return (Criteria) this;
+        }
+
+        public Criteria andBalanceLessThan(BigDecimal value) {
+            addCriterion("balance <", value, "balance");
+            return (Criteria) this;
+        }
+
+        public Criteria andBalanceLessThanOrEqualTo(BigDecimal value) {
+            addCriterion("balance <=", value, "balance");
+            return (Criteria) this;
+        }
+
+        public Criteria andBalanceIn(List<BigDecimal> values) {
+            addCriterion("balance in", values, "balance");
+            return (Criteria) this;
+        }
+
+        public Criteria andBalanceNotIn(List<BigDecimal> values) {
+            addCriterion("balance not in", values, "balance");
+            return (Criteria) this;
+        }
+
+        public Criteria andBalanceBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("balance between", value1, value2, "balance");
+            return (Criteria) this;
+        }
+
+        public Criteria andBalanceNotBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("balance not between", value1, value2, "balance");
+            return (Criteria) this;
+        }
+
+        public Criteria andTxCountIsNull() {
+            addCriterion("tx_count is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTxCountIsNotNull() {
+            addCriterion("tx_count is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTxCountEqualTo(Long value) {
+            addCriterion("tx_count =", value, "txCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andTxCountNotEqualTo(Long value) {
+            addCriterion("tx_count <>", value, "txCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andTxCountGreaterThan(Long value) {
+            addCriterion("tx_count >", value, "txCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andTxCountGreaterThanOrEqualTo(Long value) {
+            addCriterion("tx_count >=", value, "txCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andTxCountLessThan(Long value) {
+            addCriterion("tx_count <", value, "txCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andTxCountLessThanOrEqualTo(Long value) {
+            addCriterion("tx_count <=", value, "txCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andTxCountIn(List<Long> values) {
+            addCriterion("tx_count in", values, "txCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andTxCountNotIn(List<Long> values) {
+            addCriterion("tx_count not in", values, "txCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andTxCountBetween(Long value1, Long value2) {
+            addCriterion("tx_count between", value1, value2, "txCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andTxCountNotBetween(Long value1, Long value2) {
+            addCriterion("tx_count not between", value1, value2, "txCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andVerifiedStatusIsNull() {
+            addCriterion("verified_status is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andVerifiedStatusIsNotNull() {
+            addCriterion("verified_status is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andVerifiedStatusEqualTo(String value) {
+            addCriterion("verified_status =", value, "verifiedStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andVerifiedStatusNotEqualTo(String value) {
+            addCriterion("verified_status <>", value, "verifiedStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andVerifiedStatusGreaterThan(String value) {
+            addCriterion("verified_status >", value, "verifiedStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andVerifiedStatusGreaterThanOrEqualTo(String value) {
+            addCriterion("verified_status >=", value, "verifiedStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andVerifiedStatusLessThan(String value) {
+            addCriterion("verified_status <", value, "verifiedStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andVerifiedStatusLessThanOrEqualTo(String value) {
+            addCriterion("verified_status <=", value, "verifiedStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andVerifiedStatusLike(String value) {
+            addCriterion("verified_status like", value, "verifiedStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andVerifiedStatusNotLike(String value) {
+            addCriterion("verified_status not like", value, "verifiedStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andVerifiedStatusIn(List<String> values) {
+            addCriterion("verified_status in", values, "verifiedStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andVerifiedStatusNotIn(List<String> values) {
+            addCriterion("verified_status not in", values, "verifiedStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andVerifiedStatusBetween(String value1, String value2) {
+            addCriterion("verified_status between", value1, value2, "verifiedStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andVerifiedStatusNotBetween(String value1, String value2) {
+            addCriterion("verified_status not between", value1, value2, "verifiedStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andDappUrlIsNull() {
+            addCriterion("dapp_url is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDappUrlIsNotNull() {
+            addCriterion("dapp_url is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDappUrlEqualTo(String value) {
+            addCriterion("dapp_url =", value, "dappUrl");
+            return (Criteria) this;
+        }
+
+        public Criteria andDappUrlNotEqualTo(String value) {
+            addCriterion("dapp_url <>", value, "dappUrl");
+            return (Criteria) this;
+        }
+
+        public Criteria andDappUrlGreaterThan(String value) {
+            addCriterion("dapp_url >", value, "dappUrl");
+            return (Criteria) this;
+        }
+
+        public Criteria andDappUrlGreaterThanOrEqualTo(String value) {
+            addCriterion("dapp_url >=", value, "dappUrl");
+            return (Criteria) this;
+        }
+
+        public Criteria andDappUrlLessThan(String value) {
+            addCriterion("dapp_url <", value, "dappUrl");
+            return (Criteria) this;
+        }
+
+        public Criteria andDappUrlLessThanOrEqualTo(String value) {
+            addCriterion("dapp_url <=", value, "dappUrl");
+            return (Criteria) this;
+        }
+
+        public Criteria andDappUrlLike(String value) {
+            addCriterion("dapp_url like", value, "dappUrl");
+            return (Criteria) this;
+        }
+
+        public Criteria andDappUrlNotLike(String value) {
+            addCriterion("dapp_url not like", value, "dappUrl");
+            return (Criteria) this;
+        }
+
+        public Criteria andDappUrlIn(List<String> values) {
+            addCriterion("dapp_url in", values, "dappUrl");
+            return (Criteria) this;
+        }
+
+        public Criteria andDappUrlNotIn(List<String> values) {
+            addCriterion("dapp_url not in", values, "dappUrl");
+            return (Criteria) this;
+        }
+
+        public Criteria andDappUrlBetween(String value1, String value2) {
+            addCriterion("dapp_url between", value1, value2, "dappUrl");
+            return (Criteria) this;
+        }
+
+        public Criteria andDappUrlNotBetween(String value1, String value2) {
+            addCriterion("dapp_url not between", value1, value2, "dappUrl");
+            return (Criteria) this;
+        }
+
+        public Criteria andMiscSettingRunsIsNull() {
+            addCriterion("misc_setting_runs is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMiscSettingRunsIsNotNull() {
+            addCriterion("misc_setting_runs is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMiscSettingRunsEqualTo(Long value) {
+            addCriterion("misc_setting_runs =", value, "miscSettingRuns");
+            return (Criteria) this;
+        }
+
+        public Criteria andMiscSettingRunsNotEqualTo(Long value) {
+            addCriterion("misc_setting_runs <>", value, "miscSettingRuns");
+            return (Criteria) this;
+        }
+
+        public Criteria andMiscSettingRunsGreaterThan(Long value) {
+            addCriterion("misc_setting_runs >", value, "miscSettingRuns");
+            return (Criteria) this;
+        }
+
+        public Criteria andMiscSettingRunsGreaterThanOrEqualTo(Long value) {
+            addCriterion("misc_setting_runs >=", value, "miscSettingRuns");
+            return (Criteria) this;
+        }
+
+        public Criteria andMiscSettingRunsLessThan(Long value) {
+            addCriterion("misc_setting_runs <", value, "miscSettingRuns");
+            return (Criteria) this;
+        }
+
+        public Criteria andMiscSettingRunsLessThanOrEqualTo(Long value) {
+            addCriterion("misc_setting_runs <=", value, "miscSettingRuns");
+            return (Criteria) this;
+        }
+
+        public Criteria andMiscSettingRunsIn(List<Long> values) {
+            addCriterion("misc_setting_runs in", values, "miscSettingRuns");
+            return (Criteria) this;
+        }
+
+        public Criteria andMiscSettingRunsNotIn(List<Long> values) {
+            addCriterion("misc_setting_runs not in", values, "miscSettingRuns");
+            return (Criteria) this;
+        }
+
+        public Criteria andMiscSettingRunsBetween(Long value1, Long value2) {
+            addCriterion("misc_setting_runs between", value1, value2, "miscSettingRuns");
+            return (Criteria) this;
+        }
+
+        public Criteria andMiscSettingRunsNotBetween(Long value1, Long value2) {
+            addCriterion("misc_setting_runs not between", value1, value2, "miscSettingRuns");
+            return (Criteria) this;
+        }
+
+        public Criteria andHvmVersionIsNull() {
+            addCriterion("hvm_version is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andHvmVersionIsNotNull() {
+            addCriterion("hvm_version is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andHvmVersionEqualTo(String value) {
+            addCriterion("hvm_version =", value, "hvmVersion");
+            return (Criteria) this;
+        }
+
+        public Criteria andHvmVersionNotEqualTo(String value) {
+            addCriterion("hvm_version <>", value, "hvmVersion");
+            return (Criteria) this;
+        }
+
+        public Criteria andHvmVersionGreaterThan(String value) {
+            addCriterion("hvm_version >", value, "hvmVersion");
+            return (Criteria) this;
+        }
+
+        public Criteria andHvmVersionGreaterThanOrEqualTo(String value) {
+            addCriterion("hvm_version >=", value, "hvmVersion");
+            return (Criteria) this;
+        }
+
+        public Criteria andHvmVersionLessThan(String value) {
+            addCriterion("hvm_version <", value, "hvmVersion");
+            return (Criteria) this;
+        }
+
+        public Criteria andHvmVersionLessThanOrEqualTo(String value) {
+            addCriterion("hvm_version <=", value, "hvmVersion");
+            return (Criteria) this;
+        }
+
+        public Criteria andHvmVersionLike(String value) {
+            addCriterion("hvm_version like", value, "hvmVersion");
+            return (Criteria) this;
+        }
+
+        public Criteria andHvmVersionNotLike(String value) {
+            addCriterion("hvm_version not like", value, "hvmVersion");
+            return (Criteria) this;
+        }
+
+        public Criteria andHvmVersionIn(List<String> values) {
+            addCriterion("hvm_version in", values, "hvmVersion");
+            return (Criteria) this;
+        }
+
+        public Criteria andHvmVersionNotIn(List<String> values) {
+            addCriterion("hvm_version not in", values, "hvmVersion");
+            return (Criteria) this;
+        }
+
+        public Criteria andHvmVersionBetween(String value1, String value2) {
+            addCriterion("hvm_version between", value1, value2, "hvmVersion");
+            return (Criteria) this;
+        }
+
+        public Criteria andHvmVersionNotBetween(String value1, String value2) {
+            addCriterion("hvm_version not between", value1, value2, "hvmVersion");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompilerTypeIsNull() {
+            addCriterion("compiler_type is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompilerTypeIsNotNull() {
+            addCriterion("compiler_type is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompilerTypeEqualTo(String value) {
+            addCriterion("compiler_type =", value, "compilerType");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompilerTypeNotEqualTo(String value) {
+            addCriterion("compiler_type <>", value, "compilerType");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompilerTypeGreaterThan(String value) {
+            addCriterion("compiler_type >", value, "compilerType");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompilerTypeGreaterThanOrEqualTo(String value) {
+            addCriterion("compiler_type >=", value, "compilerType");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompilerTypeLessThan(String value) {
+            addCriterion("compiler_type <", value, "compilerType");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompilerTypeLessThanOrEqualTo(String value) {
+            addCriterion("compiler_type <=", value, "compilerType");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompilerTypeLike(String value) {
+            addCriterion("compiler_type like", value, "compilerType");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompilerTypeNotLike(String value) {
+            addCriterion("compiler_type not like", value, "compilerType");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompilerTypeIn(List<String> values) {
+            addCriterion("compiler_type in", values, "compilerType");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompilerTypeNotIn(List<String> values) {
+            addCriterion("compiler_type not in", values, "compilerType");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompilerTypeBetween(String value1, String value2) {
+            addCriterion("compiler_type between", value1, value2, "compilerType");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompilerTypeNotBetween(String value1, String value2) {
+            addCriterion("compiler_type not between", value1, value2, "compilerType");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompilerVersionIsNull() {
+            addCriterion("compiler_version is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompilerVersionIsNotNull() {
+            addCriterion("compiler_version is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompilerVersionEqualTo(String value) {
+            addCriterion("compiler_version =", value, "compilerVersion");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompilerVersionNotEqualTo(String value) {
+            addCriterion("compiler_version <>", value, "compilerVersion");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompilerVersionGreaterThan(String value) {
+            addCriterion("compiler_version >", value, "compilerVersion");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompilerVersionGreaterThanOrEqualTo(String value) {
+            addCriterion("compiler_version >=", value, "compilerVersion");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompilerVersionLessThan(String value) {
+            addCriterion("compiler_version <", value, "compilerVersion");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompilerVersionLessThanOrEqualTo(String value) {
+            addCriterion("compiler_version <=", value, "compilerVersion");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompilerVersionLike(String value) {
+            addCriterion("compiler_version like", value, "compilerVersion");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompilerVersionNotLike(String value) {
+            addCriterion("compiler_version not like", value, "compilerVersion");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompilerVersionIn(List<String> values) {
+            addCriterion("compiler_version in", values, "compilerVersion");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompilerVersionNotIn(List<String> values) {
+            addCriterion("compiler_version not in", values, "compilerVersion");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompilerVersionBetween(String value1, String value2) {
+            addCriterion("compiler_version between", value1, value2, "compilerVersion");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompilerVersionNotBetween(String value1, String value2) {
+            addCriterion("compiler_version not between", value1, value2, "compilerVersion");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimestampIsNull() {
+            addCriterion("create_timestamp is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimestampIsNotNull() {
+            addCriterion("create_timestamp is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimestampEqualTo(Date value) {
+            addCriterion("create_timestamp =", value, "createTimestamp");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimestampNotEqualTo(Date value) {
+            addCriterion("create_timestamp <>", value, "createTimestamp");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimestampGreaterThan(Date value) {
+            addCriterion("create_timestamp >", value, "createTimestamp");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimestampGreaterThanOrEqualTo(Date value) {
+            addCriterion("create_timestamp >=", value, "createTimestamp");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimestampLessThan(Date value) {
+            addCriterion("create_timestamp <", value, "createTimestamp");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimestampLessThanOrEqualTo(Date value) {
+            addCriterion("create_timestamp <=", value, "createTimestamp");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimestampIn(List<Date> values) {
+            addCriterion("create_timestamp in", values, "createTimestamp");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimestampNotIn(List<Date> values) {
+            addCriterion("create_timestamp not in", values, "createTimestamp");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimestampBetween(Date value1, Date value2) {
+            addCriterion("create_timestamp between", value1, value2, "createTimestamp");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimestampNotBetween(Date value1, Date value2) {
+            addCriterion("create_timestamp not between", value1, value2, "createTimestamp");
+            return (Criteria) this;
+        }
+
+        public Criteria andVerifiedTimestampIsNull() {
+            addCriterion("verified_timestamp is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andVerifiedTimestampIsNotNull() {
+            addCriterion("verified_timestamp is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andVerifiedTimestampEqualTo(Date value) {
+            addCriterion("verified_timestamp =", value, "verifiedTimestamp");
+            return (Criteria) this;
+        }
+
+        public Criteria andVerifiedTimestampNotEqualTo(Date value) {
+            addCriterion("verified_timestamp <>", value, "verifiedTimestamp");
+            return (Criteria) this;
+        }
+
+        public Criteria andVerifiedTimestampGreaterThan(Date value) {
+            addCriterion("verified_timestamp >", value, "verifiedTimestamp");
+            return (Criteria) this;
+        }
+
+        public Criteria andVerifiedTimestampGreaterThanOrEqualTo(Date value) {
+            addCriterion("verified_timestamp >=", value, "verifiedTimestamp");
+            return (Criteria) this;
+        }
+
+        public Criteria andVerifiedTimestampLessThan(Date value) {
+            addCriterion("verified_timestamp <", value, "verifiedTimestamp");
+            return (Criteria) this;
+        }
+
+        public Criteria andVerifiedTimestampLessThanOrEqualTo(Date value) {
+            addCriterion("verified_timestamp <=", value, "verifiedTimestamp");
+            return (Criteria) this;
+        }
+
+        public Criteria andVerifiedTimestampIn(List<Date> values) {
+            addCriterion("verified_timestamp in", values, "verifiedTimestamp");
+            return (Criteria) this;
+        }
+
+        public Criteria andVerifiedTimestampNotIn(List<Date> values) {
+            addCriterion("verified_timestamp not in", values, "verifiedTimestamp");
+            return (Criteria) this;
+        }
+
+        public Criteria andVerifiedTimestampBetween(Date value1, Date value2) {
+            addCriterion("verified_timestamp between", value1, value2, "verifiedTimestamp");
+            return (Criteria) this;
+        }
+
+        public Criteria andVerifiedTimestampNotBetween(Date value1, Date value2) {
+            addCriterion("verified_timestamp not between", value1, value2, "verifiedTimestamp");
             return (Criteria) this;
         }
     }
